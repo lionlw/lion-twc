@@ -220,6 +220,7 @@ encryptPolicy|加密策略
 ioThreads|io线程数
 idleTimeSeconds|连接空闲时间（单位：秒）
 #### 示例
+management端启动，并调用client消息方法（通过调用server透传消息）
 ```
 public class TWCManagementTest {
 	private static TWCManagement twcManagement;
