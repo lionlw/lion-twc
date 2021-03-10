@@ -72,19 +72,16 @@ public class TWCClientTest1 {
 #### 配置
 配置项|说明
 ----|-----
-bizThreadPoolThreadTotal|业务线程池中线程个数
-connectTimeoutSecond|twc链接超时秒数
-connectTimeoutCheckIntervalSecond|twc连接超时检测时间间隔秒数
-connectTimeoutThreshold|twc连接超时次数阈值
-connectTimeoutForbidIntervalSecond|twc连接超时，达到阈值，禁止请求的时间间隔秒数
-readTimeoutSecond|twc读取超时秒数
 isDebug|是否debug模式
+requestIPSet|ip限制白名单（为空则表示不验证）
+bizThreadPoolThreadTotal|业务线程池中线程个数
+readTimeoutSecond|twc读取超时秒数
 logLevel|日志输出级别
 messageRecieveMaxLength|最大接收消息字节数
 compressPolicy|压缩策略
 encryptPolicy|加密策略
+acceptorThreads|Acceptor线程数
 ioThreads|io线程数
-idleTimeSeconds|连接空闲时间（单位：秒）
 #### 示例
 ```
 public class TWCServerTest1 {
@@ -144,6 +141,18 @@ public class TWCServerTest1 {
 ### management
 管理端，某些分布式集群应用，需要有个统一的控制端，向server或者client发送指令消息。此时可通过集成管理端来实现。
 #### 配置
+配置项|说明
+----|-----
+bizThreadPoolThreadTotal|业务线程池中线程个数
+connectTimeoutSecond|twc链接超时秒数
+readTimeoutSecond|twc读取超时秒数
+isDebug|是否debug模式
+logLevel|日志输出级别
+messageRecieveMaxLength|最大接收消息字节数
+compressPolicy|压缩策略
+encryptPolicy|加密策略
+ioThreads|io线程数
+idleTimeSeconds|连接空闲时间（单位：秒）
 #### 示例
 ```
 public class TWCManagementTest {
