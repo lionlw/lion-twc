@@ -25,6 +25,39 @@ encryptPolicy|加密策略
 ioThreads|io线程数
 idleTimeSeconds|连接空闲时间（单位：秒）
 #### 示例
+client端集成消息接口，实现client消息方法
+```
+public class ClientHandlerMessage implements IHandlerMessage {
+
+	@Override
+	public IResult<Object> handler(String methodId, Object paramObj) {
+		IResult<Object> result = null;
+
+		switch (methodId) {
+		case "client-test1": {
+			Integer i = (Integer) paramObj;
+			result = ILIB.getIResultSucceed("client-test1 result", (i + 1000));
+		}
+			break;
+		case "client-test2": {
+			Integer i = (Integer) paramObj;
+			result = ILIB.getIResultSucceed("client-test2 result", (i + 2000));
+
+			try {
+				Thread.sleep(15000);
+			} catch (InterruptedException e) {
+			}
+		}
+			break;
+		}
+
+		return result;
+	}
+
+}
+```
+
+client端启动，并调用server消息方法
 ```
 public class TWCClientTest1 {
 	private static TWCClient twcClient;
@@ -83,6 +116,39 @@ encryptPolicy|加密策略
 acceptorThreads|Acceptor线程数
 ioThreads|io线程数
 #### 示例
+server端集成消息接口，实现server消息方法
+```
+public class ServerIHandlerMessage implements IHandlerMessage {
+
+	@Override
+	public IResult<Object> handler(String methodId, Object paramObj) {
+		IResult<Object> result = null;
+
+		switch (methodId) {
+		case "server-test1": {
+			Integer i = (Integer) paramObj;
+			result = ILIB.getIResultSucceed("server-test1 result", (i + 10));
+		}
+			break;
+		case "server-test2": {
+			Integer i = (Integer) paramObj;
+			result = ILIB.getIResultSucceed("server-test2 result", (i + 20));
+
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e) {
+			}
+		}
+			break;
+		}
+
+		return result;
+	}
+
+}
+```
+
+server端启动，并调用client消息方法
 ```
 public class TWCServerTest1 {
 	private static TWCServer twcServer;
